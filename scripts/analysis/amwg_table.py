@@ -384,8 +384,8 @@ def _get_area(tmp_file):
     """
     Earth_rad=6.371e6 # Earth Radius in meters
 
-    lon = tmp_file['lon'].data
-    lon[lon > 180.] -= 360 # shift longitude from 0-360˚ to -180-180˚
+    lon = tmp_file.assign_coords(lon=((tmp_file.lon + 180.) % 360.) - 180.)['lon'].data
+    ##lon[lon > 180.] -= 360 # shift longitude from 0-360˚ to -180-180˚
     lat = tmp_file['lat'].data
 
    
